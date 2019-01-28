@@ -1,21 +1,25 @@
-package com.devcolibri.translator;
+package com.devcolibri.translator.activity;
 
 import java.util.Arrays;
 import java.util.List;
 
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.widget.Button;
+import android.view.View;
 import android.widget.LinearLayout;
 
+import com.devcolibri.translator.R;
 import com.devcolibri.translator.adapter.WordAdapter;
 import com.devcolibri.translator.entity.Word;
 
-public class MainActivity extends AppCompatActivity {
+public class WordListActivity extends AppCompatActivity {
+    private static final int ADD_WORD_CODE = 1001;
+
     private RecyclerView recyclerView;
     private FloatingActionButton addWordButton;
     private WordAdapter wordAdapter;
@@ -33,6 +37,13 @@ public class MainActivity extends AppCompatActivity {
         wordAdapter.setWords(getWords());
 
         addWordButton = findViewById(R.id.add_word_button);
+        addWordButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(WordListActivity.this, AddWordActivity.class);
+                startActivityForResult(intent, ADD_WORD_CODE);
+            }
+        });
     }
 
 
